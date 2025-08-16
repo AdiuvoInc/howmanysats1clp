@@ -54,7 +54,7 @@
 </head>
 <body>
 <h1 id="hero"><a href="https://achicrip.org" target="_blank">Asociación Chilena de Criptotecnologías</a></h1>
-<p id="desc">Esta página muestra el valor de 1 satoshi en pesos chilenos, actualizado cada 30 segundos.</p>
+<p id="desc">Esta página muestra cuántos satoshis vale 1 peso chileno, actualizado cada 30 segundos.</p>
 <img id="illustration" src="img/bitcoin_aplasta_peso.png" alt="Bitcoin aplastando a un peso chileno" />
 <div id="value">Cargando...</div>
 <div id="timestamp"></div>
@@ -71,14 +71,14 @@ async function fetchSat(){
     const res = await fetch('https://api.yadio.io/exrates/btc');
     const data = await res.json();
     const priceCLP = data.BTC.CLP;
-    const sat = priceCLP / 100000000;
+    const sat = 100000000 / priceCLP;
 
     const num = sat.toLocaleString('es-CL', {
       minimumFractionDigits: 3,
       maximumFractionDigits: 3
     });
     document.getElementById('value').textContent =
-      `1 satoshi = ${num} pesos chilenos`;
+      `1 peso chileno = ${num} satoshis`;
     document.getElementById('timestamp').textContent = new Date().toLocaleTimeString('es-CL');
   } catch(e){
     document.getElementById('value').textContent = 'Error';
